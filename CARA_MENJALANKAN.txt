@@ -1,0 +1,50 @@
+CARA MENJALANKAN PROJECT SKANET_DANI (XAMPP / Laragon)
+========================================================
+
+1. INSTALL & JALANKAN XAMPP / LARAGON
+   - Pastikan Apache dan MySQL/MariaDB sudah RUNNING.
+
+2. LETAKKAN FOLDER PROJECT
+   - Copy folder "skanet_dani" ke:
+     XAMPP  -> C:\xampp\htdocs\skanet_dani
+     Laragon-> C:\laragon\www\skanet_dani
+
+3. IMPORT DATABASE
+   - Buka http://localhost/phpmyadmin
+   - Klik "New" / "Baru" -> buat database bernama: skanet_dani
+   - Pilih database tsb -> tab "Import" -> pilih file skanet_dani.sql -> klik "Go" / "Kirim"
+   - (File skanet_dani.sql sudah disertakan dalam paket ini)
+
+4. BUKA PROJECT DI BROWSER
+   - Akses: http://localhost/skanet_dani/login.php
+   - Login dengan akun default:
+       Username : admin
+       Password : admin123
+
+5. FITUR YANG SUDAH TERSEDIA
+   - Login & Logout
+   - Dashboard menu utama
+   - CRUD Data Guru   (tambah / edit / hapus)
+   - CRUD Data Siswa  (tambah / edit / hapus)
+   - CRUD Data Mapel  (tambah / edit / hapus)
+   - CRUD Data Nilai  (otomatis terhubung ke Siswa, Mapel, Guru lewat dropdown)
+
+CATATAN PERBAIKAN DARI FILE ASLI
+---------------------------------
+- koneksi.php: dulu ada teks "PHP" nyasar sebelum tag <?php yang bikin
+  error "headers already sent". Sudah diperbaiki.
+- login.php & logout.php: belum ada sama sekali, sekarang sudah dibuat
+  (index.php sebelumnya redirect ke login.php yang tidak ada).
+- Folder guru/, siswa/, mapel/, nilai/ sebelumnya kosong (tidak ada
+  index.php di dalamnya) sehingga menu di dashboard akan error 404.
+  Sekarang masing-masing sudah lengkap dengan index.php (list data),
+  tambah.php, edit.php, dan hapus.php.
+
+CATATAN KEAMANAN (opsional, untuk pengembangan lebih lanjut)
+--------------------------------------------------------------
+- Password admin di database masih disimpan sebagai teks biasa
+  ("admin123"), bukan hash. Untuk penggunaan nyata/production,
+  sebaiknya gunakan password_hash() saat menyimpan dan
+  password_verify() saat login.
+- Query sudah menggunakan prepared statement (mysqli_prepare) untuk
+  mencegah SQL Injection.
